@@ -4,7 +4,6 @@ go 1.25.1
 
 require (
 	github.com/openkcm/common-sdk v1.4.7
-	github.com/prometheus/client_golang v1.23.2
 	github.com/samber/oops v1.19.3
 	github.com/spf13/cobra v1.10.1
 	github.com/veqryn/slog-context v0.8.0
@@ -28,6 +27,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/oklog/ulid/v2 v2.1.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
+	github.com/prometheus/client_golang v1.23.2 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.66.1 // indirect
 	github.com/prometheus/otlptranslator v0.0.2 // indirect
