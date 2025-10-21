@@ -4,7 +4,7 @@ import (
 	"github.com/openkcm/common-sdk/pkg/commoncfg"
 	"github.com/samber/oops"
 
-	"github.com/openkcm/encrypto/internal/config"
+	"github.com/openkcm/crypto-edge/internal/config"
 )
 
 //nolint:mnd

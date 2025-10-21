@@ -14,7 +14,7 @@ import (
 
 	slogctx "github.com/veqryn/slog-context"
 
-	apiserver "github.com/openkcm/crypto-edge/cmd/crypto-edge/api-server"
+	"github.com/openkcm/crypto-edge/cmd/crypto-edge/encrypto"
 	"github.com/openkcm/crypto-edge/cmd/crypto-edge/migrate"
 )
 
@@ -63,7 +63,7 @@ func rootCmd() *cobra.Command {
 
 	cmd.AddCommand(
 		versionCmd,
-		apiserver.Cmd(BuildInfo),
+		encrypto.Cmd(BuildInfo),
 		migrate.Cmd(BuildInfo),
 	)
 

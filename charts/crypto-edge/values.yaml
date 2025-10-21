@@ -249,10 +249,6 @@ tenantManager:
     type: ClusterIP
     # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
     ports:
-      - name: kmip-tcp
-        protocol: TCP
-        port: 5696
-        targetPort: 5696
       - name: http-status
         protocol: TCP
         port: 8080
@@ -312,9 +308,6 @@ tenantManager:
 
   # Additional ports on the output Deployment definition.
   extraPorts:
-    - name: kmip-tcp
-      protocol: TCP
-      containerPort: 5696
     - name: http-status
       protocol: TCP
       containerPort: 8080
