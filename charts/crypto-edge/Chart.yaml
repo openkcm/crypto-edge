@@ -1,6 +1,6 @@
 apiVersion: v2
 name: crypto-edge
-description: External Authorization for the Envoy Gateway
+description: Crypto Edge Helm Chart
 
 # A chart can be either an 'application' or a 'library' chart.
 #
