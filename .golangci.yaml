@@ -95,7 +95,7 @@ formatters:
       sections:
         - standard
         - default
-        - prefix(github.com/openkcm/session-manager)
+        - prefix(github.com/openkcm/crypto-edge)
         - blank
         - dot
         - alias
