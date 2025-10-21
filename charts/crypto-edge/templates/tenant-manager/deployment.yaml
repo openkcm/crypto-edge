@@ -74,8 +74,8 @@ spec:
           envFrom:
           {{- . | toYaml | nindent 12 }}
           {{- end }}
-          livenessProbe:
           {{- with .Values.tenantManager.livenessProbe }}
+          livenessProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with .Values.tenantManager.readinessProbe }}

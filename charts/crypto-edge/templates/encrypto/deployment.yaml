@@ -74,8 +74,8 @@ spec:
           envFrom:
           {{- . | toYaml | nindent 12 }}
           {{- end }}
-          livenessProbe:
           {{- with .Values.encrypto.livenessProbe }}
+          livenessProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with .Values.encrypto.readinessProbe }}

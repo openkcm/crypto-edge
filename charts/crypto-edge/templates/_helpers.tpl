@@ -18,7 +18,7 @@ If release name contains chart name it will be used as a full name.
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
+{{- printf "%s" $name | trunc 63 | trimSuffix "-" }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -58,16 +58,16 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Encrypto Selector labels
 */}}
 {{- define "crypto-edge.encrypto.labels" -}}
-crypto-edge.openkcm.io/component: encrypto
 {{ include "crypto-edge.labels" . }}
+{{ include "crypto-edge.name" . }}.openkcm.io/component: encrypto
 {{- end }}
 
 {{/*
 Tenant Manager Selector labels
 */}}
 {{- define "crypto-edge.tenantManager.labels" -}}
-crypto-edge.openkcm.io/component: tenant-manager
 {{ include "crypto-edge.labels" . }}
+{{ include "crypto-edge.name" . }}.openkcm.io/component: tenant-manager
 {{- end }}
 
 
@@ -84,16 +84,16 @@ app.kubernetes.io/component: {{ .Chart.Name }}
 Encrypto Selector labels
 */}}
 {{- define "crypto-edge.encrypto.selectorLabels" -}}
-crypto-edge.openkcm.io/component: encrypto
 {{ include "crypto-edge.selectorLabels" . }}
+{{ include "crypto-edge.name" . }}.openkcm.io/component: encrypto
 {{- end }}
 
 {{/*
 Tenant Manager Selector labels
 */}}
 {{- define "crypto-edge.tenantManager.selectorLabels" -}}
-crypto-edge.openkcm.io/component: tenant-manager
 {{ include "crypto-edge.selectorLabels" . }}
+{{ include "crypto-edge.name" . }}.openkcm.io/component: tenant-manager
 {{- end }}
 
 {{/*
