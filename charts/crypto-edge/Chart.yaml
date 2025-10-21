@@ -1,5 +1,5 @@
 apiVersion: v2
-name: crypto-layer
+name: crypto-edge
 description: External Authorization for the Envoy Gateway
 
 # A chart can be either an 'application' or a 'library' chart.

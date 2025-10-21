@@ -1,8 +1,8 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "crypto-layer.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- define "crypto-edge.name" -}}
+{{- default .Chart.Name .Values.global.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
@@ -10,11 +10,11 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "crypto-layer.fullname" -}}
-{{- if .Values.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- define "crypto-edge.fullname" -}}
+{{- if .Values.global.fullnameOverride }}
+{{- .Values.global.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- $name := default .Chart.Name .Values.nameOverride }}
+{{- $name := default .Chart.Name .Values.global.nameOverride }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -31,23 +31,23 @@ By default this is not set so the helm release namespace will be used
 This gets around an problem within helm discussed here
 https://github.com/helm/helm/issues/5358
 */}}
-{{- define "crypto-layer.namespace" -}}
-    {{ .Values.namespace | default .Release.Namespace }}
+{{- define "crypto-edge.namespace" -}}
+    {{ .Values.global.namespace | default .Release.Namespace }}
 {{- end -}}
 
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "crypto-layer.chart" -}}
+{{- define "crypto-edge.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "crypto-layer.labels" -}}
-helm.sh/chart: {{ include "crypto-layer.chart" . }}
-{{ include "crypto-layer.selectorLabels" . }}
+{{- define "crypto-edge.labels" -}}
+helm.sh/chart: {{ include "crypto-edge.chart" . }}
+{{ include "crypto-edge.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -55,20 +55,53 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
-Selector labels
+Encrypto Selector labels
 */}}
-{{- define "crypto-layer.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "crypto-layer.name" . }}
+{{- define "crypto-edge.encrypto.labels" -}}
+crypto-edge.openkcm.io/component: encrypto
+{{ include "crypto-edge.labels" . }}
+{{- end }}
+
+{{/*
+Tenant Manager Selector labels
+*/}}
+{{- define "crypto-edge.tenantManager.labels" -}}
+crypto-edge.openkcm.io/component: tenant-manager
+{{ include "crypto-edge.labels" . }}
+{{- end }}
+
+
+{{/*
+Common Selector labels
+*/}}
+{{- define "crypto-edge.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "crypto-edge.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/component: {{ .Chart.Name }}
 {{- end }}
 
 {{/*
+Encrypto Selector labels
+*/}}
+{{- define "crypto-edge.encrypto.selectorLabels" -}}
+crypto-edge.openkcm.io/component: encrypto
+{{ include "crypto-edge.selectorLabels" . }}
+{{- end }}
+
+{{/*
+Tenant Manager Selector labels
+*/}}
+{{- define "crypto-edge.tenantManager.selectorLabels" -}}
+crypto-edge.openkcm.io/component: tenant-manager
+{{ include "crypto-edge.selectorLabels" . }}
+{{- end }}
+
+{{/*
 Create the name of the service account to use
 */}}
-{{- define "crypto-layer.serviceAccountName" -}}
+{{- define "crypto-edge.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "crypto-layer.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "crypto-edge.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
@@ -77,7 +110,7 @@ Create the name of the service account to use
 {{/*
 Util function for generating the image URL based on the provided options.
 */}}
-{{- define "crypto-layer.image" -}}
+{{- define "crypto-edge.image" -}}
 {{- $defaultTag := index . 1 -}}
 {{- with index . 0 -}}
 {{- if .registry -}}{{ printf "%s/%s" .registry .repository }}{{- else -}}{{- .repository -}}{{- end -}}
