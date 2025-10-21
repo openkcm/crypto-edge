@@ -1,10 +1,10 @@
-# OpenKCM: Crypto Layer
+# OpenKCM: Crypto Edge
 
 [![REUSE status](https://api.reuse.software/badge/github.com/openkcm/crypto-edge)](https://api.reuse.software/info/github.com/openkcm/crypto-edge)
 
 ## About this project
 
-OpenKCM Crypto Layer is a manging key materials!.
+OpenKCM Crypto Edge is a manging key materials!.
 
 ## Support, Feedback, Contributing
 

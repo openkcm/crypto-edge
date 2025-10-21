@@ -12,7 +12,7 @@ If release name contains chart name it will be used as a full name.
 */}}
 {{- define "crypto-edge.fullname" -}}
 {{- if .Values.global.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- .Values.global.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
 {{- $name := default .Chart.Name .Values.global.nameOverride }}
 {{- if contains $name .Release.Name }}
@@ -55,7 +55,24 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
-Selector labels
+Encrypto Selector labels
+*/}}
+{{- define "crypto-edge.encrypto.labels" -}}
+crypto-edge.openkcm.io/component: encrypto
+{{ include "crypto-edge.labels" . }}
+{{- end }}
+
+{{/*
+Tenant Manager Selector labels
+*/}}
+{{- define "crypto-edge.tenantManager.labels" -}}
+crypto-edge.openkcm.io/component: tenant-manager
+{{ include "crypto-edge.labels" . }}
+{{- end }}
+
+
+{{/*
+Common Selector labels
 */}}
 {{- define "crypto-edge.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "crypto-edge.name" . }}
@@ -64,13 +81,29 @@ app.kubernetes.io/component: {{ .Chart.Name }}
 {{- end }}
 
 {{/*
+Encrypto Selector labels
+*/}}
+{{- define "crypto-edge.encrypto.selectorLabels" -}}
+crypto-edge.openkcm.io/component: encrypto
+{{ include "crypto-edge.selectorLabels" . }}
+{{- end }}
+
+{{/*
+Tenant Manager Selector labels
+*/}}
+{{- define "crypto-edge.tenantManager.selectorLabels" -}}
+crypto-edge.openkcm.io/component: tenant-manager
+{{ include "crypto-edge.selectorLabels" . }}
+{{- end }}
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "crypto-edge.serviceAccountName" -}}
-{{- if .Values.encrypto.serviceAccount.create }}
-{{- default (include "crypto-edge.fullname" .) .Values.encrypto.serviceAccount.name }}
+{{- if .Values.serviceAccount.create }}
+{{- default (include "crypto-edge.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.encrypto.serviceAccount.name }}
+{{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
 

@@ -91,8 +91,8 @@ func startStatusServer(ctx context.Context, cfg *config.Config) {
 func Cmd(buildInfo string) *cobra.Command {
 	var cmd = &cobra.Command{
 		Use:   "migrate",
-		Short: "Crypto Layer database migration",
-		Long:  "Crypto Layer database migration command to handle database schema migrations.",
+		Short: "Crypto Edge database migration",
+		Long:  "Crypto Edge database migration command to handle database schema migrations.",
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			cfg, err := common.LoadConfig(buildInfo)
 			if err != nil {

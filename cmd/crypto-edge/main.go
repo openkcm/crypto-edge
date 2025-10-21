@@ -29,7 +29,7 @@ var (
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Crypto Layer Version",
+	Short: "Crypto Edge Version",
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		isVersionCmd = true
 
@@ -46,9 +46,9 @@ var versionCmd = &cobra.Command{
 
 func rootCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "crypto",
-		Short: "Crypto Layer",
-		Long: "Crypto Layer is a key management service to manage " +
+		Use:   "cryptoedge",
+		Short: "Crypto Edge",
+		Long: "Crypto Edge is a key management service to manage " +
 			"encryption keys for applications and services.",
 	}
 

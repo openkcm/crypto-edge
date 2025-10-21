@@ -4,16 +4,14 @@ metadata:
   name: {{ include "crypto-edge.fullname" . }}-tenant-manager
   namespace: {{ include "crypto-edge.namespace" . }}
   labels:
-    crypto-edge.openkcm.io/component: tenant-manager
-    {{- include "crypto-edge.labels" . | nindent 4 }}
+    {{- include "crypto-edge.tenantManager.labels" . | nindent 4 }}
 spec:
   {{- if .Values.tenantManager.hpa.enabled }}
   replicas: {{ .Values.tenantManager.hpa.minReplicas }}
   {{- end }}
   selector:
     matchLabels:
-      crypto-edge.openkcm.io/component: tenant-manager
-      {{- include "crypto-edge.selectorLabels" . | nindent 6 }}
+      {{- include "crypto-edge.tenantManager.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.tenantManager.pod.annotations }}
@@ -21,8 +19,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        crypto-edge.openkcm.io/component: tenant-manager
-        {{- include "crypto-edge.labels" . | nindent 8 }}
+        {{- include "crypto-edge.tenantManager.labels" . | nindent 8 }}
         {{- with .Values.tenantManager.pod.labels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}

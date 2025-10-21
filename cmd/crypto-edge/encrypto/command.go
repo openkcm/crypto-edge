@@ -101,9 +101,9 @@ func startStatusServer(ctx context.Context, cfg *config.Config) {
 
 func Cmd(buildInfo string) *cobra.Command {
 	var cmd = &cobra.Command{
-		Use:   "api-server",
-		Short: "Crypto Layer API Server",
-		Long:  "Crypto Layer API Server is a component of manging the crypto keys",
+		Use:   "encrypto",
+		Short: "Crypto Edge Encrypto",
+		Long:  "Crypto Edge Encrypto is a component of manging the crypto keys",
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			cfg, err := common.LoadConfig(buildInfo)
 			if err != nil {

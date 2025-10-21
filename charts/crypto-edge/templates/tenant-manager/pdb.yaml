@@ -5,13 +5,11 @@ metadata:
   name: {{ include "crypto-edge.fullname" . }}-tenant-manager
   namespace: {{ include "crypto-edge.namespace" . }}
   labels:
-    crypto-edge.openkcm.io/component: tenant-manager
-    {{- include "crypto-edge.labels" . | nindent 4 }}
+    {{- include "crypto-edge.tenantManager.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      crypto-edge.openkcm.io/component: tenant-manager
-      {{- include "crypto-edge.selectorLabels" . | nindent 6 }}
+      {{- include "crypto-edge.tenantManager.selectorLabels" . | nindent 6 }}
   {{- if not (or (hasKey .Values.tenantManager.pod.disruptionBudget "minAvailable") (hasKey .Values.tenantManager.pod.disruptionBudget "maxUnavailable")) }}
   minAvailable: 1 # Default value because minAvailable and maxUnavailable are not set
   {{- end }}

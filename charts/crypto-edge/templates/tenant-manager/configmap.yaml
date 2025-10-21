@@ -4,8 +4,7 @@ metadata:
   name: {{ include "crypto-edge.name" . }}-tenant-manager-config
   namespace: {{ include "crypto-edge.namespace" . }}
   labels:
-    crypto-edge.openkcm.io/component: tenant-manager
-    {{- include "crypto-edge.labels" . | nindent 4 }}
+    {{- include "crypto-edge.tenantManager.labels" . | nindent 4 }}
 immutable: {{ .Values.config.isImmutable | default false }}
 data:
   config.yaml: |-
