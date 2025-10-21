@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "crypto-edge.fullname" . }}
+  namespace: {{ include "crypto-edge.namespace" . }}
+  labels:
+    crypto-edge.openkcm.io/component: encrypto
+    {{- include "crypto-edge.labels" . | nindent 4 }}
+    {{- with .Values.encrypto.service.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+{{- with .Values.encrypto.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+spec:
+  type: {{ .Values.encrypto.service.type }}
+{{- with .Values.encrypto.service.ports }}
+  ports:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+  selector:
+    crypto-edge.openkcm.io/component: encrypto
+    {{- include "crypto-edge.selectorLabels" . | nindent 4 }}
