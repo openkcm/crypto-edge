@@ -2,7 +2,7 @@
 Expand the name of the chart.
 */}}
 {{- define "crypto-edge.name" -}}
-{{- default .Chart.Name .Values.global.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
@@ -11,10 +11,10 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 If release name contains chart name it will be used as a full name.
 */}}
 {{- define "crypto-edge.fullname" -}}
-{{- if .Values.global.fullnameOverride }}
-{{- .Values.global.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- if .Values.fullnameOverride }}
+{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- $name := default .Chart.Name .Values.global.nameOverride }}
+{{- $name := default .Chart.Name .Values.nameOverride }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -32,7 +32,7 @@ This gets around an problem within helm discussed here
 https://github.com/helm/helm/issues/5358
 */}}
 {{- define "crypto-edge.namespace" -}}
-    {{ .Values.global.namespace | default .Release.Namespace }}
+    {{ .Values.namespace | default .Release.Namespace }}
 {{- end -}}
 
 {{/*
@@ -100,10 +100,10 @@ Tenant Manager Selector labels
 Create the name of the service account to use
 */}}
 {{- define "crypto-edge.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "crypto-edge.fullname" .) .Values.serviceAccount.name }}
+{{- if .Values.global.serviceAccount.create }}
+{{- default (include "crypto-edge.fullname" .) .Values.global.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.serviceAccount.name }}
+{{- default "default" .Values.global.serviceAccount.name }}
 {{- end }}
 {{- end }}
 

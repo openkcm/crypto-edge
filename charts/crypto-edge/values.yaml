@@ -2,22 +2,23 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# Override the "name" value, which is used to annotate some of
+# the resources that are created by this Chart (using "app.kubernetes.io/name").
+# +docs:property
+nameOverride: ""
+
+# Override the "fullname" value. This value is used as part of
+# most of the names of the resources created by this Helm chart.
+# +docs:property
+fullnameOverride: ""
+
+# This namespace allows you to define where the services are installed into.
+# If not set then they use the namespace of the release.
+# This is helpful when installing a chart dependency (sub chart).
+namespace: ""
+
+
 global:
-  # Override the "name" value, which is used to annotate some of
-  # the resources that are created by this Chart (using "app.kubernetes.io/name").
-  # +docs:property
-  nameOverride: ""
-
-  # Override the "fullname" value. This value is used as part of
-  # most of the names of the resources created by this Helm chart.
-  # +docs:property
-  fullnameOverride: ""
-
-  # This namespace allows you to define where the services are installed into.
-  # If not set then they use the namespace of the release.
-  # This is helpful when installing a chart dependency (sub chart).
-  namespace: ""
-
   # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
   image:
     # The container registry to pull the image from.
@@ -40,44 +41,42 @@ global:
     # +docs:property
     # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
 
-    command: [ "/bin/crypto-edge" ]
-
-    # Setting a digest will override any tag.
+    # Setting the command.
     # +docs:property
-    # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
+    command: [ "/bin/crypto-edge" ]
 
     # Kubernetes imagePullPolicy.
     pullPolicy: IfNotPresent
 
-  # This is for the secretes for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-  imagePullSecrets:
-    - name: "registry-access"
+    # This is for the secretes for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    pullSecrets:
+      - name: "registry-access"
 
 
-# This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Automatically mount a ServiceAccount's API credentials?
-  automount: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Automatically mount a ServiceAccount's API credentials?
+    automount: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
 
-securityContext: {}
-#  allowPrivilegeEscalation: false
-#  capabilities:
-#    drop:
-#      - ALL
-#  readOnlyRootFilesystem: true
-#  privileged: false
-#  runAsNonRoot: true
-#  runAsGroup: 65532
-#  runAsUser: 65532
-#  seccompProfile:
-#    type: RuntimeDefault
+  securityContext: {}
+  #  allowPrivilegeEscalation: false
+  #  capabilities:
+  #    drop:
+  #      - ALL
+  #  readOnlyRootFilesystem: true
+  #  privileged: false
+  #  runAsNonRoot: true
+  #  runAsGroup: 65532
+  #  runAsUser: 65532
+  #  seccompProfile:
+  #    type: RuntimeDefault
 
 # Encrypto module configuration
 encrypto:
