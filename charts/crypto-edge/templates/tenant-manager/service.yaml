@@ -5,7 +5,7 @@ metadata:
   name: {{ include "crypto-edge.fullname" . }}-tenant-manager
   namespace: {{ include "crypto-edge.namespace" . }}
   labels:
-    {{- include "crypto-edge.tenantManager.labels" . | nindent 4 }}
+    {{- include "crypto-edge.tenant-manager.labels" . | nindent 4 }}
     {{- with .Values.tenantManager.service.labels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
@@ -20,4 +20,4 @@ spec:
     {{- toYaml . | nindent 4 }}
 {{- end }}
   selector:
-    {{- include "crypto-edge.tenantManager.selectorLabels" . | nindent 4 }}
+    {{- include "crypto-edge.tenant-manager.selectorLabels" . | nindent 4 }}

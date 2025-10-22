@@ -65,7 +65,7 @@ Encrypto Selector labels
 {{/*
 Tenant Manager Selector labels
 */}}
-{{- define "crypto-edge.tenantManager.labels" -}}
+{{- define "crypto-edge.tenant-manager.labels" -}}
 {{ include "crypto-edge.labels" . }}
 {{ include "crypto-edge.name" . }}.openkcm.io/component: tenant-manager
 {{- end }}
@@ -91,7 +91,7 @@ Encrypto Selector labels
 {{/*
 Tenant Manager Selector labels
 */}}
-{{- define "crypto-edge.tenantManager.selectorLabels" -}}
+{{- define "crypto-edge.tenant-manager.selectorLabels" -}}
 {{ include "crypto-edge.selectorLabels" . }}
 {{ include "crypto-edge.name" . }}.openkcm.io/component: tenant-manager
 {{- end }}
@@ -100,10 +100,10 @@ Tenant Manager Selector labels
 Create the name of the service account to use
 */}}
 {{- define "crypto-edge.serviceAccountName" -}}
-{{- if .Values.global.serviceAccount.create }}
-{{- default (include "crypto-edge.fullname" .) .Values.global.serviceAccount.name }}
+{{- if .Values.common.serviceAccount.create }}
+{{- default (include "crypto-edge.fullname" .) .Values.common.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.global.serviceAccount.name }}
+{{- default "default" .Values.common.serviceAccount.name }}
 {{- end }}
 {{- end }}
 
